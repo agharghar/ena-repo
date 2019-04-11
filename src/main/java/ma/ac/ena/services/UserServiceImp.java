@@ -1,5 +1,7 @@
 package ma.ac.ena.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ma.ac.ena.dao.UserRepository;
@@ -14,4 +16,6 @@ public class UserServiceImp implements UserService {
 	public User save(User u) {
 		return userRepository.save(u);
 	}
+
+
 }
