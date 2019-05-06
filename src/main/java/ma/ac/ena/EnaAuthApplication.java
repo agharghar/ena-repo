@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import ma.ac.ena.dao.EtudiantRepository;
@@ -30,7 +32,7 @@ public class EnaAuthApplication {
 
 		List<Etudiant> etds = etudiantRepository.findAll();
 
-		etds.forEach(e -> System.out.println(e.getNom()));
+		//etds.forEach(e -> System.out.println(e.getNom()));
 
 		/*
 		 * for (Etudiant e : etds) { System.out.println(e.getNom()); }
