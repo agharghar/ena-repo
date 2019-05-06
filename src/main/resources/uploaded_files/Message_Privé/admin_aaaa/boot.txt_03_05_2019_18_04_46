@@ -1,0 +1,51 @@
+@Entity 
+@inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TYPE_COMPTE" , discriminatorType=Discriminator.STRING , length =2 )
+@DiscriminatorValue("compteCourant")
+
+@RequestParam => parameter in the request == 'www.ezf.com?name=dzek?za=azod"
+
+ModelMap test ==> model
+test.put(key , "value" ) 
+
+@SessionAttribute("name") => to get the sessions value => Model model ; 
+							  model.get("name") ;
+
+"redirect:/controllerUrl"
+
+@InitBinder
+
+dev tools => refresh directly
+
+
+Boot security 
+
+
+@Configuration
+public class SecurityConf extends WebSecurityConfigurerAdapter{
+	
+
+}
+
+authentication
+securityContextLogoutHandler() ;
+
+
+
+@GetMapping("/test/{id}/lool")
+public String test(@pathVariable int id ) {
+	...
+}
+
+@RequestBody // Json Mapped to Object java 
+ResponseEntity.created(Uri).build()
+
+
+
+JPA 
+@Repository
+public inteface UserRepositry implements CrudRepository<User, Long>{ //<CLass,typeOfId>
+
+
+}
+

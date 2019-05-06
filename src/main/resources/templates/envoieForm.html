@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmln:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Send a file</title>
+</head>
+<body>
+
+<form  th:action="@{/uploadFile}"  method="post" name="multipleUploadForm" enctype="multipart/form-data" th:object="${documentWrapper}">
+   <div class="MainNode">
+    <select name="to" th:object="${allEmployees}" onchange="change(event)">
+	  <option th:each="em : ${allEmployees}" th:text="${em.user.username}"  th:value="${em.user.username}">
+
+	  </option>
+	</select>
+    <input type="file" name="files" >
+    <table border="2px"> 
+    	<thead>
+    		<th>Ref</th>
+    		<th>Titre</th>
+    		<th>Type</th>
+    		<th>Commentaire</th>
+    	</thead>
+		<tbody>
+			<tr>
+				<td>
+					<input type="text" th:field="*{document.ref}" >
+				</td>
+				<td>
+					<input type="text" th:field="*{document.titre}" >
+				</td>
+				<td>
+					<input type="text" th:field="*{document.type}" >
+				</td>
+				<td>
+					<textarea  th:field="*{document.commentaire}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" th:field="*{categorie.libelle_categorie}" placeholder="Libelle Categorie" >
+				</td>
+				<td>
+					<input type="text" th:field="*{categorie.commantaire}" placeholder="Commantaire Categorie" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" th:field="*{version.libelle_version}" placeholder="Libelle Version" >
+				</td>
+				<td>
+					<input type="text" th:field="*{version.commentaire}" placeholder="Commantaire Version" >
+				</td>
+			
+			</tr>
+			
+			
+		
+		</tbody>    
+    
+    </table>
+    
+    </div>
+
+</form>
+
+<button type="button" name="add" onclick="add()">Add</button>
+<button type="button" onclick="submit()">Submit</button>
+
+</body>
+
+<script>
+
+
+
+var multipleUploadForm = document.getElementsByName('multipleUploadForm');
+
+
+
+	function submit(){
+		let MyArray = Array.from(multipleUploadForm) ;
+		MyArray.map( f => upload(f) ) ; 
+		
+		
+		}
+
+
+		function upload(f){
+			var formData = new FormData(f);
+			var xhr = new XMLHttpRequest();
+		    xhr.open("POST", "/uploadFile");
+		    xhr.send(formData);
+			
+			}
+
+		
+
+
+	function add(){
+		let div = multipleUploadForm[0] ; 
+		div = div.cloneNode(true) ; 
+		div.querySelectorAll("input").forEach(f => f.value = "" )
+		div.querySelector("select").style.display = "none";
+		document.body.insertBefore(div, document.body.querySelector('button[name=add]'));
+		
+		}
+
+
+		function change(event){
+			Array.from(document.body.querySelectorAll("select")).map(f => f.value = event.target.value)
+			
+			}
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+ 		<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+ 		<script src="https://svn.apache.org/repos/asf/activemq/trunk/activemq-web-demo/src/main/webapp/js/amq.js"></script>
+</html>

@@ -1,0 +1,23 @@
+Definition - What does Cyber Defense mean? 
+Cyber defense is a computer network defense mechanism which includes response to actions and critical infrastructure protection and information assurance for organizations, government entities and other possible networks. Cyber defense focuses on preventing, detecting and providing timely responses to attacks or threats so that no infrastructure or information is tampered with. With the growth in volume as well as complexity of cyber attacks, cyber defense is essential for most entities in order to protect sensitive information as well as to safeguard assets.
+
+Techopedia explains Cyber Defense
+With the understanding of the specific environment, cyber defense analyzes the different threats possible to the given environment. It then helps in devising and driving the strategies necessary to counter the malicious attacks or threats. A wide range of different activities is involved in cyber defense for protecting the concerned entity as well as for the rapid response to a threat landscape. These could include reducing the appeal of the environment to the possible attackers, understanding the critical locations & sensitive information, enacting preventative controls to ensure attacks would be expensive, attack detection capability and reaction and response capabilities. Cyber defense also carries out technical analysis to identify the paths and areas the attackers could target.
+Cyber defense provides the much-needed assurance to run the processes and activities, free from worries about threats. It helps in enhancing the security strategy utilizations and resources in the most effective fashion. Cyber defense also helps in improving the effectiveness of the security resources and security expenses, especially in critical locations.
+Application Security Fundamentals
+•	Application security includes measures taken throughout an application's life-cycle to prevent exceptions in the security policy of an application or the underlying system (vulnerabilities) through flaws in the design, development, deployment, upgrade, or maintenance of the application.*
+•	The primary focus is on Layer 7 of the OSI Model
+•	AppSec should be part of an organization’s or vendor’s Software (or System) Development Life-Cycle (SDLC)
+•	A key component of application security should be for developers and their managers to be aware of basic AppSec requirements, common threats and effective countermeasures
+•	AppSec knowledge and maturity is significantly lower today than traditional network security 
+Risks Associated With Vulnerable Applications
+
+•	Unauthorized access to sensitive customer or company data
+•	Theft of sensitive data to conduct identity theft, credit card fraud or other crimes
+•	Defacement of websites; strong potential for brand damage
+•	Manipulation of data impacting data integrity, quality and organization’s reputation
+•	Redirection of users to malicious web sites; phishing and malware distribution
+•	Denial of service; availability of data  
+•	Attackers can assume valid user identities 
+•	Access to hidden web pages using forged URLs
+•	Attacker’s hostile data can trick the interpreter to execute unintended commands

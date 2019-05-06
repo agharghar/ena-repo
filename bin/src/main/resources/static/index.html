@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Acceuil</title>
+</head>
+<body>
+<h2>Home Page ENA Agadir</h2>
+	<hr>
+	
+	<p>
+	Welcome to the ENA university Agadir home page!
+	</p>
+	
+	<hr>
+	
+	<!-- display user name and role -->
+	
+	<p>
+		User: <security:authentication property="principal.username" /> <!-- need jsp here -->
+		<br><br>
+		Role(s): <security:authentication property="principal.authorities" />
+	</p>
+	
+	<hr>
+</body>
+</html>
