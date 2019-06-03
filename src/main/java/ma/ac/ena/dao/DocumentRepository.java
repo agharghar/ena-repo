@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import ma.ac.ena.entities.Document;
 
-public interface DocumentRepository extends JpaRepository<Document, String>{
+public interface DocumentRepository extends JpaRepository<Document, Integer>{
 	
-	Document findBychemin(String chemin) ; 
+	Document findBynomFichier(String nomFichier) ; 
 
 }

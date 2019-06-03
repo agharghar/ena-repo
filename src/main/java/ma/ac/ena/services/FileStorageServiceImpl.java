@@ -1,7 +1,9 @@
 package ma.ac.ena.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import ma.ac.ena.entities.Envoie;
+import ma.ac.ena.entities.Role;
 import ma.ac.ena.entities.User;
 import ma.ac.ena.exception.FileStorageException;
 import ma.ac.ena.exception.MyFileNotFoundException;
@@ -22,10 +25,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 @Service
+@Transactional
 public class FileStorageServiceImpl  implements FileStorageService{
 
     private final Path fileStorageLocation;
@@ -33,7 +38,8 @@ public class FileStorageServiceImpl  implements FileStorageService{
     private HttpSession session ; 
     @Autowired
     private EnvoieService envoieService ; 
-    
+    @Value("${authRole}") 
+    private String authRole ; 
     
     
     @Autowired
@@ -75,12 +81,21 @@ public class FileStorageServiceImpl  implements FileStorageService{
         }
     }
 
-    public Resource loadFileAsResource(String fileName , String from_to) {
+    public Resource loadFileAsResource(String fileName , String from_to ) {
         try {
             Path filePath = this.fileStorageLocation.resolve("Message_Privé").resolve(from_to).resolve(fileName).normalize();
             Resource resource ; 
-            Envoie envoie = envoieService.isAuth(filePath.toUri() , ( (User ) session.getAttribute("user") ).getEmployee().getId() ) ; 
-            if(envoie != null) {
+            Boolean auth = false ; 
+            User user = ( (User ) session.getAttribute("user") ) ; 
+            Set<Role> roles = user.getRoles() ; 
+            Envoie envoie = envoieService.isAuth(filePath.getFileName().toString() , user.getEmployee().getId() ) ; 
+            for(Role role : roles) {
+            	if(role.getRole().equals( authRole ) ) {
+            		auth = true ; 
+            		break ; 
+            	}
+            }
+            if(envoie != null || auth  ) {
             	
             	resource = new UrlResource(filePath.toUri());
             	
@@ -90,7 +105,8 @@ public class FileStorageServiceImpl  implements FileStorageService{
             }
             
             if(resource != null ) {
-            	envoieService.setLu(envoie) ; 
+            	if(envoie != null)
+            		envoieService.setLu(envoie) ; 
                 return resource; 
             } else {
                 throw new MyFileNotFoundException("File not found " + fileName);

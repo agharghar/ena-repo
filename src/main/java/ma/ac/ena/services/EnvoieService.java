@@ -6,7 +6,7 @@ import ma.ac.ena.entities.Envoie;
 
 public interface EnvoieService {
 
-	Envoie isAuth(URI uri, int id);
+	Envoie isAuth(String fileName, int id);
 
 	void setLu(Envoie envoie);
 

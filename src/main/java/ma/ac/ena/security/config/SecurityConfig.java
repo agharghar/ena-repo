@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("a")).roles("ADMIN", "PROF",
 				"ETUDIANT", "SCOLARITE");
-		auth.inMemoryAuthentication().withUser("sco").password("{bcrypt}scolar").roles("ETUDIANT", "SCOLARITE");
-		auth.inMemoryAuthentication().withUser("prof").password("{bcrypt}prof").roles("PROF", "ETUDIANT");
+		auth.inMemoryAuthentication().withUser("employee").password("{bcrypt}a").roles("ETUDIANT", "SCOLARITE");
+		auth.inMemoryAuthentication().withUser("toto").password("{bcrypt}a").roles("PROF", "ETUDIANT");
 		auth.inMemoryAuthentication().passwordEncoder(passwordEncoder()).withUser("etd").password("etd")
 				.roles("ETUDIANT");
 	}

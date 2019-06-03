@@ -18,7 +18,6 @@ import ma.ac.ena.api.UploadFileResponse;
 import ma.ac.ena.entities.Employee;
 import ma.ac.ena.entities.User;
 import ma.ac.ena.services.DocumentwrapperService;
-import ma.ac.ena.services.DocumentwrapperServiceImpl;
 import ma.ac.ena.services.FileStorageService;
 import ma.ac.ena.services.FileStorageServiceImpl;
 import ma.ac.ena.wrapper.Documentwrapper;
@@ -50,7 +49,7 @@ public class FileController {
     
     
     @PostMapping("/uploadFile")
-    private void uploadFile( @RequestParam("files") MultipartFile file
+    public void uploadFile( @RequestParam("files") MultipartFile file
     		, String to ,  Documentwrapper documentwrapper) {
     	Employee employee = ( (User) session.getAttribute("user") ).getEmployee() ; 
 
@@ -63,12 +62,22 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
         documentwrapper.getDocument().setChemin(path.toString());
+        documentwrapper.getDocument().setNomFichier(fileName);
         int toId = documentwrapperService.save(documentwrapper , to  ) ;
         messagingTemplate.convertAndSend("/queue/privé."+toId, new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize() , employee.getNom()+" "+employee.getPrenom() ) );
     }
-
-
+    
+    @PostMapping("/uploadFileToMany")
+    public void uploadFileTomany( @RequestParam("files") MultipartFile file
+    		, String []to ,  Documentwrapper documentwrapper){
+    	
+    	for(String t : to) {
+    		uploadFile(  file, t,  documentwrapper) ; 
+    	}
+    	
+    }
+    
 
     @GetMapping("/downloadFile/{from_to:.+_.+}/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String from_to, @PathVariable String fileName, HttpServletRequest request ) {

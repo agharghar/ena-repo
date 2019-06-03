@@ -2,6 +2,7 @@ package ma.ac.ena.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,11 +17,11 @@ public class Role implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "ATTRIBUER")
-	private Collection<Permission> permission;
+	private Set<Permission> permission;
 
 	@ManyToMany
 	@JoinTable(name = "ATTRIBUER")
-	private Collection<Forms> forms;
+	private Set<Forms> forms;
 
 	// constructors
 	public Role() {
@@ -50,19 +51,19 @@ public class Role implements Serializable {
 		this.description = description;
 	}
 
-	public Collection<Permission> getPermission() {
+	public Set<Permission> getPermission() {
 		return permission;
 	}
 
-	public void setPermission(Collection<Permission> permission) {
+	public void setPermission(Set<Permission> permission) {
 		this.permission = permission;
 	}
 
-	public Collection<Forms> getForms() {
+	public Set<Forms> getForms() {
 		return forms;
 	}
 
-	public void setForms(Collection<Forms> forms) {
+	public void setForms(Set<Forms> forms) {
 		this.forms = forms;
 	}
 

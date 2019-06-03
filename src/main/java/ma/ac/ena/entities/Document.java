@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -19,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Document implements Serializable{
 
 	@Id
-	private String ref ; 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id ;
 	
 	private String type ;
 	private String titre ; 
@@ -27,6 +30,7 @@ public class Document implements Serializable{
 	private Date date_mise_ajour ; 
 	private String commentaire ; 
 	private String chemin ; 
+	private String nomFichier  ; 
 	
 	@OneToMany(mappedBy="groupePartage_document_PK.document")
 	private Set<GroupePartage_Document> groupePartage_Documents;
@@ -54,13 +58,19 @@ public class Document implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getRef() {
-		return ref;
+
+
+	public int getId() {
+		return id;
 	}
 
-	public void setRef(String ref) {
-		this.ref = ref;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
 
 	public String getType() {
 		return type;
@@ -158,9 +168,21 @@ public class Document implements Serializable{
 	public void setDossiers(Set<Dossier> dossiers) {
 		this.dossiers = dossiers;
 	}
-	
-	
 
+
+
+	public String getNomFichier() {
+		return nomFichier;
+	}
+
+
+
+	public void setNomFichier(String nomFichier) {
+		this.nomFichier = nomFichier;
+	}
+	
+	
+	
 
 	
 }

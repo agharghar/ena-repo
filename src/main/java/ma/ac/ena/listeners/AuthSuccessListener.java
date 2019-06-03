@@ -35,6 +35,7 @@ public class AuthSuccessListener implements ApplicationListener<AuthenticationSu
 		session.setAttribute("user", userRepository.findByUsername(username));
 		session.setAttribute("documentNonLu", documentsNonLu);
 		
+
 		
 	} 
 	

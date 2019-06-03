@@ -25,20 +25,34 @@ import ma.ac.ena.wrapper.Documentwrapper;
 public class UserController {
 	
 	@Autowired
-	private EmployeeService employeeService ; 
+	private EmployeeService employeeService ;
+	@Autowired
+	private HttpSession session ; 
 
 	
 	
-	@GetMapping(path="/employeeEnvoieFrom")
-	public String employeEnvoieForm(ModelMap modelMap , HttpSession session  ) {
-		SecurityContext securityContext = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
-		String username = securityContext.getAuthentication().getName();
+	@GetMapping(path="/simple/envoie")
+	public String employeeToEmployee(ModelMap modelMap , HttpSession session  ) {
+		String username = ( (User ) session.getAttribute("user") ) .getUsername() ; 
 		List<Employee> employees = employeeService.getAllUsersExeptMe(username) ; 
 
 		modelMap.addAttribute("allEmployees", employees) ; 
 		modelMap.addAttribute("documentWrapper" , new Documentwrapper()) ; 
 
 		return "envoieForm" ; 
+		
+	}
+	
+	
+	@GetMapping(path="/groupe/envoie")
+	public String employeeToGroupe(ModelMap modelMap , HttpSession session  ) {
+		String username = ( (User ) session.getAttribute("user") ) .getUsername() ; 
+		List<Employee> employees = employeeService.getAllUsersExeptMe(username) ; 
+		
+		modelMap.addAttribute("allEmployees", employees.toArray()) ; 
+		modelMap.addAttribute("documentWrapper" , new Documentwrapper()) ; 
+
+		return "envoieGroupe" ; 
 		
 	}
 	
